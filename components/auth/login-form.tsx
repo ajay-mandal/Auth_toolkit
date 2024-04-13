@@ -13,7 +13,8 @@ import {
     FormMessage
 } from "@/components/ui/form";
 import { CardWrapper } from "@/components/auth/card-wrapper";
-import { Input } from "../ui/input";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export function LoginForm() {
 
@@ -25,6 +26,10 @@ export function LoginForm() {
         },
     });
 
+    const onSubmit = (values: z.infer<typeof LoginSchema>) => {
+        console.log(values);
+    }
+
     return(
         <CardWrapper
         headerLabel="Welcome back"
@@ -33,7 +38,7 @@ export function LoginForm() {
         showSocial
         >
             <Form {...form}>
-                <form onSubmit={form.handleSubmit(()=>{})}
+                <form onSubmit={form.handleSubmit(onSubmit)}
                 className="space-y-6"
                 >
                     <div className="space-y-4">
@@ -70,6 +75,9 @@ export function LoginForm() {
                         )}
                         />
                     </div>
+                    <Button type="submit" className="w-full">
+                        Login
+                    </Button>
                 </form>
             </Form>
         </CardWrapper>
