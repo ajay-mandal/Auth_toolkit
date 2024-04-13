@@ -13,6 +13,7 @@ import {
     FormMessage
 } from "@/components/ui/form";
 import { CardWrapper } from "@/components/auth/card-wrapper";
+import { Input } from "../ui/input";
 
 export function LoginForm() {
 
@@ -31,7 +32,46 @@ export function LoginForm() {
         backButtonHref="/register"
         showSocial
         >
-            Login Form!
+            <Form {...form}>
+                <form onSubmit={form.handleSubmit(()=>{})}
+                className="space-y-6"
+                >
+                    <div className="space-y-4">
+                        <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field })=>(
+                            <FormItem>
+                                <FormLabel>Email</FormLabel>
+                                <FormControl>
+                                    <Input
+                                    {...field}
+                                    placeholder="hi@ajaymandal.me"
+                                    type="email"/>
+                                </FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                        )}
+                        />
+                        <FormField
+                        control={form.control}
+                        name="password"
+                        render={({ field })=>(
+                            <FormItem>
+                                <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input
+                                    {...field}
+                                    placeholder="********"
+                                    type="password"/>
+                                </FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                        )}
+                        />
+                    </div>
+                </form>
+            </Form>
         </CardWrapper>
     )
 }
