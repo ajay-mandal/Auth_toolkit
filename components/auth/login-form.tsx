@@ -47,7 +47,7 @@ export function LoginForm() {
             login(values)
                 .then((data)=>{
                     setError(data?.error);
-                    // setSuccess(data.success);
+                    setSuccess(data?.success);
                 })
             // For API route, simply use
             // axios.post("/host/api/route", values)
