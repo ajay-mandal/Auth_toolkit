@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from 'zod';
 import { LoginSchema } from "@/zod/validator";
 import { useState, useTransition } from "react";
+import { useSearchParams } from "next/navigation";
 
 import {
     Form,
@@ -22,6 +23,10 @@ import { login } from "@/actions/login";
 
 export function LoginForm() {
 
+    const searchParams = useSearchParams();
+    const urlError = searchParams.get("error") === "OAuthAccountNotLinked"
+        ? "Email already in use with different providers!"
+        : "";
     const [ error, setError ] = useState<string | undefined>("");
     const [ success, setSuccess ] = useState<string | undefined>("");
 
@@ -42,7 +47,7 @@ export function LoginForm() {
             login(values)
                 .then((data)=>{
                     setError(data?.error);
-                    setSuccess(data.success);
+                    // setSuccess(data.success);
                 })
             // For API route, simply use
             // axios.post("/host/api/route", values)
@@ -97,7 +102,7 @@ export function LoginForm() {
                         )}
                         />
                     </div>
-                    <FormError message={error}/>
+                    <FormError message={error || urlError }/>
                     <FormSuccess message={success}/>
                     <Button type="submit" className="w-full" disabled={isPending}>
                         Login
