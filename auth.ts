@@ -1,5 +1,6 @@
 
 import NextAuth from "next-auth"
+import { UserRole } from "@prisma/client";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { db } from "@/lib/db"
 import authConfig from "@/auth.config"
@@ -17,7 +18,7 @@ export const {
             }
 
             if (token.role && session.user) {
-                session.user.role = token.role;
+                session.user.role = token.role as UserRole;
             }
             return session;
         },
