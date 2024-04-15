@@ -5,6 +5,7 @@ import * as z from 'zod';
 import { LoginSchema } from "@/zod/validator";
 import { useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 import {
     Form,
@@ -20,7 +21,6 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
-
 export function LoginForm() {
 
     const searchParams = useSearchParams();
@@ -97,6 +97,16 @@ export function LoginForm() {
                                     placeholder="********"
                                     type="password"/>
                                 </FormControl>
+                                <Button
+                                size="sm"
+                                variant="link"
+                                asChild
+                                className="px-0 font-normal"
+                                >
+                                    <Link href="/reset">
+                                        Forget password?
+                                    </Link>
+                                </Button>
                                 <FormMessage/>
                             </FormItem>
                         )}
