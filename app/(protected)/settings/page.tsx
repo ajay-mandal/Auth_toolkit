@@ -10,8 +10,7 @@ export default function SettingsPage() {
     }
 
     return (
-        <div>
-            {JSON.stringify(user)}
+        <div className="bg-white p-10 rounded-xl">
             <Button type="submit" onClick={onClick}>
                 SignOut
             </Button>
