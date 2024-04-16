@@ -17,7 +17,7 @@ export const UserInfo = ({
     label
 }: UserInfoProps) => {
     return (
-        <Card className="mx-auto w-96 shadow-md">
+        <Card className="mx-auto w-[420px] shadow-md">
             <CardHeader>
                 <p className="text 2xl font-semibold text-center">
                     {label}

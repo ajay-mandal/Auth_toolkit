@@ -1,5 +1,5 @@
 import { UserInfo } from "@/components/user-info";
-import currentUserServerSide from "@/hooks/currentUserServerSide";
+import { currentUserServerSide } from "@/hooks/currentUserServerSide";
 
 export default async function ServerPage () {
 

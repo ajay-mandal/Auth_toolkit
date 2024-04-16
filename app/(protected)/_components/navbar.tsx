@@ -8,8 +8,8 @@ import { usePathname } from "next/navigation";
 export const Navbar = () => {
     const pathname = usePathname();
     return (
-        <nav className="bg-secondary flex justify-between item-center
-            p-4 rounded-xl w-auto shadow-sm gap-x-4">
+        <nav className="bg-secondary flex justify-center item-center
+            p-3 rounded-xl w-fit shadow-sm gap-x-4">
             <div className="flex gap-x-2">
                 <Button
                 asChild
