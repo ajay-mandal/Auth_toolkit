@@ -5,13 +5,13 @@ interface ProtectedLayoutProps {
 }
 export default function ProtectedLayout ({children}: ProtectedLayoutProps) {
     return(
-        <div className="h-full w-full bg-gray-800" suppressHydrationWarning>
-            <div className="px-4 py-5 flex justify-center">
-                <Navbar />
+            <div className="h-full w-full bg-gray-800" suppressHydrationWarning>
+                <div className="px-4 py-5 flex justify-center">
+                    <Navbar />
+                </div>
+                <div className="flex flex-col gap-y-10 px-4 items-center">
+                    {children}
+                </div>
             </div>
-            <div className="flex flex-col gap-y-10 px-4 items-center">
-                {children}
-            </div>
-        </div>
     )
 }
