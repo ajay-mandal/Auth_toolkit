@@ -19,7 +19,7 @@ export default {
 
         }),
         Credentials({
-            async authorize(credentials) {
+            async authorize(credentials, req) : Promise<any> {
                 const validatedFields = LoginSchema.safeParse(credentials);
 
                 if(validatedFields.success) {
