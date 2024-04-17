@@ -1,8 +1,7 @@
 import { UserInfo } from "@/components/user-info";
 import { currentUserServerSide } from "@/hooks/currentUserServerSide";
 
-export default async function ServerPage () {
-
+const ServerPage = async () =>  {
     const user = await currentUserServerSide();
     return(
         <div>
@@ -13,3 +12,5 @@ export default async function ServerPage () {
         </div>
     )
 }
+
+export default ServerPage;

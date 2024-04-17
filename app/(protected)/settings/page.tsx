@@ -19,7 +19,7 @@ import {
     CardHeader,
     CardContent,
 } from "@/components/ui/card"
-import { useState, useTransition } from "react";
+import {useEffect, useState, useTransition } from "react";
 import {
     Form,
     FormField,
@@ -36,9 +36,11 @@ import { useCurrentUser } from "@/hooks/use-current-user";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { UserRole } from "@prisma/client";
+import { useRouter } from "next/navigation";
 
-export default function SettingsPage() {
+const SettingsPage = () => {
 
+    const route = useRouter();
     const user = useCurrentUser();
     const [error, setError ] = useState<string | undefined>();
     const [success, setSuccess ] = useState<string | undefined>();
@@ -227,3 +229,5 @@ export default function SettingsPage() {
         </Card>
     )
 }
+
+export default SettingsPage;

@@ -2,9 +2,10 @@
 import { UserInfo } from "@/components/user-info";
 import { useCurrentUser } from "@/hooks/use-current-user";
 
-export default function ClientPage () {
+const ClientPage = () => {
 
     const user = useCurrentUser();
+
     return(
         <div>
             <UserInfo
@@ -14,3 +15,5 @@ export default function ClientPage () {
         </div>
     )
 }
+
+export default ClientPage;

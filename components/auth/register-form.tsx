@@ -24,8 +24,8 @@ export function RegisterForm() {
 
     const [ error, setError ] = useState<string | undefined>("");
     const [ success, setSuccess ] = useState<string | undefined>("");
-
     const [ isPending, startTransition ] = useTransition();
+    const [showPassword, setShowPassword] = useState(false);
 
     const form = useForm<z.infer<typeof RegisterSchema>>({
         resolver: zodResolver(RegisterSchema),
@@ -33,6 +33,7 @@ export function RegisterForm() {
             email:"",
             password:"",
             name:"",
+            confirm_password:"",
         },
     });
 
@@ -103,6 +104,24 @@ export function RegisterForm() {
                         render={({ field })=>(
                             <FormItem>
                                 <FormLabel>Password</FormLabel>
+                                <FormControl>
+                                    <Input
+                                    {...field}
+                                    disabled={isPending}
+                                    placeholder="********"
+                                    type={showPassword ? 'text' : 'password'}
+                                    />
+                                </FormControl>
+                                <FormMessage/>
+                            </FormItem>
+                        )}
+                        />
+                        <FormField
+                        control={form.control}
+                        name="confirm_password"
+                        render={({ field })=>(
+                            <FormItem>
+                                <FormLabel>Confirm Password</FormLabel>
                                 <FormControl>
                                     <Input
                                     {...field}

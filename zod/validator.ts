@@ -20,7 +20,10 @@ export const RegisterSchema = z.object({
     }),
     name: z.string().min(1, {
         message: "Name is required"
-    })
+    }),
+    confirm_password:z.string().min(6,{
+        message:"Minimum characters should be 6"
+    }),
 });
 
 export const ResetSchema = z.object({
