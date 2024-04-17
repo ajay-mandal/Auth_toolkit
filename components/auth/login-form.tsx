@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from 'zod';
 import { LoginSchema } from "@/zod/validator";
-import { useState, useTransition } from "react";
+import { useEffect, useState, useTransition } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 
@@ -89,7 +89,8 @@ export function LoginForm() {
                                         <Input
                                         {...field}
                                         disabled={isPending}
-                                        placeholder="123456"
+                                        placeholder="******"
+                                        type="code"
                                         />
                                     </FormControl>
                                     <FormMessage/>

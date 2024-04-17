@@ -14,6 +14,7 @@ export const {
     auth,
     unstable_update
 } = NextAuth({
+    secret: process.env.AUTH_SECRET,
     pages: {
         signIn: "/login",
         error: "/error",
@@ -36,7 +37,7 @@ export const {
             // Prevent sign in without email verification
             if(!existingUser?.emailVerified) return false;
 
-            if(existingUser.isTwoFactorEnabled) {
+            if(existingUser.isTwoFactorEnabled && existingUser.email) {
                 const twoFactorConfirmation = await getTwoFactorConfirmationByUserId(existingUser.id);
 
                 if(!twoFactorConfirmation) return false;
