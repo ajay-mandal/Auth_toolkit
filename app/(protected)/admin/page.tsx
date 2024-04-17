@@ -37,7 +37,7 @@ export default function AdminPage() {
         <Card className="mx-auto w-[420px]">
             <CardHeader>
                 <p className="text-2xl font-semibold text-center">
-                    Admin
+                🛡️ Admin
                 </p>
             </CardHeader>
             <CardContent className="space-y-4">

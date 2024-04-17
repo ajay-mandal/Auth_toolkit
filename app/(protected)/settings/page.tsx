@@ -19,7 +19,6 @@ import {
     CardHeader,
     CardContent,
 } from "@/components/ui/card"
-import { useSession } from "next-auth/react";
 import { useState, useTransition } from "react";
 import {
     Form,
@@ -43,7 +42,6 @@ export default function SettingsPage() {
     const user = useCurrentUser();
     const [error, setError ] = useState<string | undefined>();
     const [success, setSuccess ] = useState<string | undefined>();
-    const { update } = useSession();
     const [isPending, startTransition ] = useTransition();
 
     const form = useForm<z.infer<typeof SettingsSchema>>({

@@ -7,7 +7,7 @@ export default async function ServerPage () {
     return(
         <div>
             <UserInfo
-            label="Server component"
+            label="🖥️ Server component"
             user={user}
             />
         </div>

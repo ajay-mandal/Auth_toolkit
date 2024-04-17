@@ -19,7 +19,7 @@ export const UserInfo = ({
     return (
         <Card className="mx-auto w-[420px] shadow-md">
             <CardHeader>
-                <p className="text 2xl font-semibold text-center">
+                <p className="text-2xl font-semibold text-center">
                     {label}
                 </p>
             </CardHeader>

@@ -8,10 +8,11 @@ import { getUserById } from "@/data/user";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 import { getAccountByUserId } from "@/data/account";
 export const {
-    handlers:{GET,POST},
+    handlers: {GET, POST},
     signIn,
     signOut,
-    auth
+    auth,
+    unstable_update
 } = NextAuth({
     pages: {
         signIn: "/login",

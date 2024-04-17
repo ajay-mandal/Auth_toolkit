@@ -9,7 +9,7 @@ export default function ProtectedLayout ({children}: ProtectedLayoutProps) {
             <div className="px-4 py-5 flex justify-center">
                 <Navbar />
             </div>
-            <div className="h-full w-full flex flex-col gap-y-10 px-4 items-center">
+            <div className="flex flex-col gap-y-10 px-4 items-center">
                 {children}
             </div>
         </div>

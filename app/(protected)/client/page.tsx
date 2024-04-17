@@ -8,7 +8,7 @@ export default function ClientPage () {
     return(
         <div>
             <UserInfo
-            label="Client component"
+            label="🧑🏻‍💻 Client component"
             user={user}
             />
         </div>
