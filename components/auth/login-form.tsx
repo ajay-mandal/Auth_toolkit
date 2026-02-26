@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { FormError } from "@/components/form-error";
 import { FormSuccess } from "@/components/form-success";
 import { login } from "@/actions/login";
+import { resend2FACode } from "@/actions/resend-2fa";
 export function LoginForm() {
 
     const searchParams = useSearchParams();
@@ -66,6 +67,34 @@ export function LoginForm() {
         });
     }
 
+    const handleResend2FA = () => {
+        const email = form.getValues("email");
+        if (!email) return;
+
+        setError("");
+        setSuccess("");
+        
+        startTransition(() => {
+            resend2FACode({ email })
+                .then((data) => {
+                    if (data?.error) {
+                        setError(data.error);
+                    }
+                    if (data?.success) {
+                        setSuccess(data.success);
+                    }
+                })
+                .catch(() => setError("Failed to resend code"));
+        });
+    }
+
+    const handleBack = () => {
+        setShowTwoFactor(false);
+        form.setValue("code", "");
+        setError("");
+        setSuccess("");
+    }
+
     return(
         <CardWrapper
         headerLabel="Welcome back"
@@ -79,6 +108,7 @@ export function LoginForm() {
                 >
                     <div className="space-y-4">
                         {showTwoFactor && (
+                            <>
                             <FormField
                             control={form.control}
                             name="code"
@@ -89,14 +119,39 @@ export function LoginForm() {
                                         <Input
                                         {...field}
                                         disabled={isPending}
-                                        placeholder="******"
-                                        type="code"
+                                        placeholder="123456"
+                                        type="text"
+                                        maxLength={6}
                                         />
                                     </FormControl>
                                     <FormMessage/>
+                                    <p className="text-xs text-muted-foreground mt-2">
+                                        Enter the 6-digit code sent to your email. Code expires in 5 minutes.
+                                    </p>
                                 </FormItem>
                             )}
                             />
+                            <div className="flex gap-2">
+                                <Button
+                                    type="button"
+                                    variant="outline"
+                                    onClick={handleBack}
+                                    disabled={isPending}
+                                    className="flex-1"
+                                >
+                                    Back
+                                </Button>
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    onClick={handleResend2FA}
+                                    disabled={isPending}
+                                    className="flex-1"
+                                >
+                                    Resend Code
+                                </Button>
+                            </div>
+                            </>
                         )}
                         {!showTwoFactor && (
                             <>

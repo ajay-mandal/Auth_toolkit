@@ -26,6 +26,22 @@ export const register = async (values: z.infer<typeof RegisterSchema>) => {
 
   const existingUser = await getUserByEmail(email);
   if (existingUser) {
+    // If user exists but email not verified, resend verification email
+    if (!existingUser.emailVerified) {
+      const verificationToken = await generateVerificationToken(email);
+      const emailResult = await sendVerificationEmail(
+        verificationToken.email,
+        verificationToken.token,
+      );
+
+      if (!emailResult.success) {
+        return {
+          error: "Failed to send confirmation email. Please try again later.",
+        };
+      }
+
+      return { success: "Confirmation email resent!" };
+    }
     return { error: "Email already in use" };
   }
 
