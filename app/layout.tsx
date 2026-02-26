@@ -8,8 +8,8 @@ import { Suspense } from "react";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Auth v5",
-  description: "Reusable authentication system made using authjsv5",
+  title: "Auth5",
+  description: "Reusable authentication system made using auth.js v5",
 };
 
 export default async function RootLayout({

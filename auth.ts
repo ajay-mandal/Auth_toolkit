@@ -1,14 +1,17 @@
-
 import NextAuth from "next-auth"
 import { UserRole } from "@prisma/client";
 import { PrismaAdapter } from "@auth/prisma-adapter";
+import bcrypt from "bcryptjs";
+import Credentials from "next-auth/providers/credentials";
 import { db } from "@/lib/db"
 import authConfig from "@/auth.config"
-import { getUserById } from "@/data/user";
+import { getUserById, getUserByEmail } from "@/data/user";
 import { getTwoFactorConfirmationByUserId } from "@/data/two-factor-confirmation";
 import { getAccountByUserId } from "@/data/account";
+import { LoginSchema } from "@/zod/validator";
+
 export const {
-    handlers: {GET, POST},
+    handlers,
     signIn,
     signOut,
     auth,
@@ -88,5 +91,27 @@ export const {
     },
     adapter: PrismaAdapter(db),
     session: {strategy: "jwt"},
-    ...authConfig
+    ...authConfig,
+    providers: [
+        ...authConfig.providers,
+        // Credentials provider with Node.js dependencies (bcrypt, Prisma)
+        // Only runs in Node.js runtime, not in Edge middleware
+        Credentials({
+            async authorize(credentials) : Promise<any> {
+                const validatedFields = LoginSchema.safeParse(credentials);
+
+                if(validatedFields.success) {
+                    const { email, password } = validatedFields.data;
+                    const user = await getUserByEmail(email);
+                    if(!user || !user.password) return null;
+
+                    const passwordsMatch = await bcrypt.compare(password, user.password);
+                    if(passwordsMatch) {
+                        return user;
+                    }
+                    return null;
+                }
+            }
+        })
+    ]
 })

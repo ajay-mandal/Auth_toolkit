@@ -14,16 +14,16 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  password      String?
-  role          UserRole        @default(USER)
-  accounts      Account[]
-  isTwoFactorEnabled   Boolean @default(false)
-  twoFactorConfirmation   TwoFactorConfirmation?
+  id                    String                 @id @default(cuid())
+  name                  String?
+  email                 String                 @unique
+  emailVerified         DateTime?
+  image                 String?
+  password              String?
+  role                  UserRole               @default(USER)
+  accounts              Account[]
+  isTwoFactorEnabled    Boolean                @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
 }
 
 enum UserRole {
@@ -32,7 +32,7 @@ enum UserRole {
 }
 
 model Account {
-  id                String          @id @default(cuid())
+  id                String  @id @default(cuid())
   userId            String
   type              String
   provider          String
@@ -51,36 +51,36 @@ model Account {
 }
 
 model VerificationToken {
-  id              String    @id       @default(cuid())
-  email           String
-  token           String    @unique
-  expires         DateTime
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
 
   @@unique([email, token])
 }
 
 model PasswordResetToken {
-  id              String    @id      @default(cuid())
-  email           String
-  token           String    @unique
-  expires         DateTime
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
 
   @@unique([email, token])
 }
 
 model TwoFactorToken {
-  id              String    @id      @default(cuid())
-  email           String
-  token           String    @unique
-  expires         DateTime
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
 
   @@unique([email, token])
 }
 
 model TwoFactorConfirmation {
-    id              String    @id      @default(cuid())
-    userId          String
-    user User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([userId])
+  @@unique([userId])
 }
